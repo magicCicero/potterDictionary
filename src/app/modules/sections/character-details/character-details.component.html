@@ -1,0 +1,37 @@
+<div class="grid grid-cols-6 gap-5">
+  @for (character of characters; track character.id) {
+  <div class="card w-96 bg-base-200 shadow-xl min-h-max">
+    <figure>
+      <img src="{{ character.attributes.image }}" alt="Shoes" />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">
+        {{ character.attributes.name }}
+        @if (character.attributes.house !== null) {
+        <div class="badge badge-secondary">
+          {{ character.attributes.house }}
+        </div>
+        }
+      </h2>
+      @if (character.attributes.born){
+      <p>Born: {{ character.attributes.born }}</p>
+      } @if (character.attributes.skin_color){
+      <p>Skin: {{ character.attributes.skin_color }}</p>
+      } @if (character.attributes.hair_color){
+      <p>Hair: {{ character.attributes.hair_color }}</p>
+      } @if (character.attributes.eye_color){
+      <p>Eye: {{ character.attributes.eye_color }}</p>
+      }
+      <div class="card-actions justify-end">
+        <div class="badge badge-outline">
+          {{ character.attributes.species }}
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+<app-pagination-join-buttons
+  (nextPageClicked)="nextPage()"
+  (previousPageClicked)="previousPage()"
+></app-pagination-join-buttons>
