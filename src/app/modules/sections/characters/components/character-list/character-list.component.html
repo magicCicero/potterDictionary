@@ -1,0 +1,11 @@
+<div class="flex items-center justify-center">
+  <app-pagination-join-buttons
+    (nextPageClicked)="nextPage()"
+    (previousPageClicked)="previousPage()"
+  ></app-pagination-join-buttons>
+</div>
+<div class="grid grid-cols-6 gap-5">
+  @for (character of characters; track character.id) {
+  <app-character-card [character]="character"></app-character-card>
+  }
+</div>

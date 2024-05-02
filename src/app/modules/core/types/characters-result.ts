@@ -1,4 +1,4 @@
-export type Characters = {
+export type Character = {
   id: string;
   type: string;
   attributes: CharacterAttributes;

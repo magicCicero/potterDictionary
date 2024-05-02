@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { CharacterDetailsComponent } from './modules/sections/character-details/character-details.component';
+import { CharactersComponent } from './modules/sections/characters/characters.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'character', pathMatch: 'full' },
   {
-    path: 'character',
-    component: CharacterDetailsComponent,
+    path: 'characters',
+    component: CharactersComponent,
     pathMatch: 'full',
   },
 
