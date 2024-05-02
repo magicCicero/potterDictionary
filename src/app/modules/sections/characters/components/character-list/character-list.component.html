@@ -1,11 +1,18 @@
-<div class="flex items-center justify-center">
+<div class="flex items-center justify-center mb-7">
   <app-pagination-join-buttons
     (nextPageClicked)="nextPage()"
     (previousPageClicked)="previousPage()"
   ></app-pagination-join-buttons>
 </div>
 <div class="grid grid-cols-6 gap-5">
-  @for (character of characters; track character.id) {
+  @if(isLoading){
+  <app-skeleton-card></app-skeleton-card>
+  <app-skeleton-card></app-skeleton-card>
+  <app-skeleton-card></app-skeleton-card>
+  <app-skeleton-card></app-skeleton-card>
+  <app-skeleton-card></app-skeleton-card>
+  <app-skeleton-card></app-skeleton-card> } @else { @for (character of
+  characters; track character.id) {
   <app-character-card [character]="character"></app-character-card>
-  }
+  } }
 </div>

@@ -3,28 +3,46 @@ import { Character } from '../../../../core/types/characters-result';
 import { PaginationJoinButtonsComponent } from '../../../../shared/buttons/pagination-join-buttons/pagination-join-buttons.component';
 import { CharactersService } from '../../../../core/services/clients/characters.service';
 import { CharacterCardComponent } from '../character-card/character-card.component';
+import { SkeletonCardComponent } from '../../../../shared/animations/skeletons/skeleton-card/skeleton-card.component';
 
 @Component({
   selector: 'app-character-list',
   standalone: true,
-  imports: [PaginationJoinButtonsComponent, CharacterCardComponent],
+  imports: [
+    PaginationJoinButtonsComponent,
+    CharacterCardComponent,
+    SkeletonCardComponent,
+  ],
   templateUrl: './character-list.component.html',
   styleUrl: './character-list.component.css',
 })
 export class CharacterListComponent {
   private pageNumber: number = 1;
+
   public characters: Character[] = [];
+  public isLoading: boolean = false;
   constructor(private _charactersClientService: CharactersService) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.fetchCharacters();
+    this.isLoading = false;
   }
 
   private async fetchCharacters(): Promise<void> {
-    this.characters = await this._charactersClientService.getHogwartsCharacters(
-      this.pageNumber
-    );
+    try {
+      this.isLoading = true;
+      this.characters =
+        await this._charactersClientService.getHogwartsCharacters(
+          this.pageNumber
+        );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.isLoading = false;
+    }
   }
+
   public async nextPage(): Promise<void> {
     this.pageNumber++;
     this.fetchCharacters();
