@@ -20,13 +20,11 @@ export class CharacterListComponent {
   private pageNumber: number = 1;
 
   public characters: Character[] = [];
-  public isLoading: boolean = false;
+  public isLoading: boolean = true;
   constructor(private _charactersClientService: CharactersService) {}
 
   ngOnInit() {
-    this.isLoading = true;
     this.fetchCharacters();
-    this.isLoading = false;
   }
 
   private async fetchCharacters(): Promise<void> {

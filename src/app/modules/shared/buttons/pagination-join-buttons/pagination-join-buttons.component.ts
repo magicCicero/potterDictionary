@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination-join-buttons',
@@ -11,11 +11,11 @@ export class PaginationJoinButtonsComponent {
   @Output() previousPageClicked: EventEmitter<void> = new EventEmitter<void>();
   @Output() nextPageClicked: EventEmitter<void> = new EventEmitter<void>();
 
-  emitPreviousPageClick() {
+  public emitPreviousPageClick(): void {
     this.previousPageClicked.emit();
   }
 
-  emitNextPageClick() {
+  public emitNextPageClick(): void {
     this.nextPageClicked.emit();
   }
 }

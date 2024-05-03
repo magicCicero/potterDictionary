@@ -1,0 +1,29 @@
+<div class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>Attribute</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let keypar of filteredDetails | keyvalue; let i = index">
+        <th>{{ i + 1 }}</th>
+        <td>{{ keypar.key }}</td>
+        <td>
+          @if (keypar.key==='Wiki'|| keypar.key==='Image') {
+          <a
+            class="text-secondary"
+            href="{{ keypar.value }}
+             "
+          >
+            {{ keypar.value }}
+          </a>
+          } @else { {{ keypar.value }} }
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
