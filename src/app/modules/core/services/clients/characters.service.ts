@@ -15,10 +15,7 @@ export class CharactersService {
       const result = await firstValueFrom(
         this._http.get<{ data: Character[] }>(url)
       );
-      const filteredData = result.data.filter(
-        (character) => character.attributes.image !== null
-      );
-      return filteredData;
+      return result.data;
     } catch (error) {
       console.error('Fehler beim Abrufen der Daten von der API:', error);
       throw error;
@@ -41,11 +38,11 @@ export class CharactersService {
   }
   public async getFilteredCharacters(
     characterName: string | null
-  ): Promise<Character> {
-    const url = `https://api.potterdb.com/v1/characters?filter[name_cont]=${characterName}`;
+  ): Promise<Character[]> {
+    const url = `https://api.potterdb.com/v1/characters?filter[name_cont]=${characterName}&page[size]=30`;
     try {
       const result = await firstValueFrom(
-        this._http.get<{ data: Character }>(url)
+        this._http.get<{ data: Character[] }>(url)
       );
       return result.data;
     } catch (error) {

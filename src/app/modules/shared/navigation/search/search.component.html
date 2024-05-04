@@ -3,9 +3,9 @@
     type="text"
     class="grow"
     placeholder="Search"
-    (keydown.enter)="searchCharacter($event.target.value)"
+    (input)="onInputChange($event)"
   />
-  />
+
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 16 16"
