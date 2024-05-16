@@ -5,8 +5,11 @@ import { CharactersService } from '../../../../core/services/clients/characters.
 import { CharacterCardComponent } from '../character-card/character-card.component';
 import { SkeletonCardComponent } from '../../../../shared/animations/skeletons/skeleton-card/skeleton-card.component';
 import { SearchService } from '../../../../core/services/search.service';
-import { debounceTime } from 'rxjs';
+import { Subscription, debounceTime } from 'rxjs';
 import { FilterDataService } from '../../../../core/services/filter-data.service';
+import { PageStatsBoxComponent } from '../../../../shared/navigation/page-stats-box/page-stats-box.component';
+import { PaginationDataService } from '../../../../core/services/pagination-data.service';
+import { PaginationData } from '../../../../core/types/pagination-data';
 
 @Component({
   selector: 'app-character-list',
@@ -15,19 +18,22 @@ import { FilterDataService } from '../../../../core/services/filter-data.service
     PaginationJoinButtonsComponent,
     CharacterCardComponent,
     SkeletonCardComponent,
+    PageStatsBoxComponent,
   ],
   templateUrl: './character-list.component.html',
   styleUrl: './character-list.component.css',
 })
 export class CharacterListComponent {
   private pageNumber: number = 1;
+  public paginationMetaData: PaginationData | null = null;
   public characters: Character[] = [];
   public isLoading: boolean = true;
 
   constructor(
     private _charactersClientService: CharactersService,
     private _searchService: SearchService,
-    private _filterDataService: FilterDataService
+    private _filterDataService: FilterDataService,
+    private readonly _paginationService: PaginationDataService
   ) {}
 
   ngOnInit() {
@@ -38,6 +44,9 @@ export class CharacterListComponent {
       .subscribe((value) => {
         this.getFilteredCharacter(value);
       });
+    this._paginationService.getPaginationData().subscribe((value) => {
+      this.paginationMetaData = value;
+    });
   }
 
   private async fetchCharacters(): Promise<void> {
