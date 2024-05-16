@@ -1,8 +1,12 @@
-<div class="flex items-center justify-center mb-7">
+<div class="flex items-center justify-around mb-7">
   <app-pagination-join-buttons
     (nextPageClicked)="nextPage()"
     (previousPageClicked)="previousPage()"
   ></app-pagination-join-buttons>
+  <app-page-stats-box
+    statsTitle="Characters"
+    [pageData]="paginationMetaData"
+  ></app-page-stats-box>
 </div>
 <div class="flex flex-wrap gap-5">
   @if(isLoading){
